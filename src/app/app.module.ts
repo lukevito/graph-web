@@ -9,23 +9,29 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {AppRoutingModule} from './app-routing.module';
 
 import {ContactComponent} from './contact/contact.component';
-import {NavComponent} from './nav/nav.component';
 import {HomeComponent} from './home/home.component';
 import {AboutComponent} from './about/about.component';
+import { NavComponent } from './nav/nav.component';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import  {MaterialComponentsImportModule} from "./material-components-import/material-components-import.module";
+
+// https://coursetro.com/posts/code/171/Angular-7-Tutorial---Learn-Angular-7-by-Example
 @NgModule({
   declarations: [
     AppComponent,
     ContactComponent,
-    NavComponent,
     HomeComponent,
-    AboutComponent
+    AboutComponent,
+    NavComponent
   ],
   imports: [
     AppRoutingModule,
     BrowserModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MaterialComponentsImportModule
   ],
   providers: [],
   bootstrap: [AppComponent]
