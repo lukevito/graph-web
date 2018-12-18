@@ -1,0 +1,31 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="true"
+               [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+               [mode]="(isHandset$ | async) ? 'over' : 'side'"
+               [(opened)]="opened">
+
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item href="/">Home</a>
+      <a mat-list-item href="neo-vis">vis</a>
+      <a mat-list-item href="about">About</a>
+      <a mat-list-item href="contact">Contact</a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <!--https://material.io/tools/icons/?search=favorite&icon=card_membership&style=round-->
+      <button mat-icon-button (click)="drawer.toggle()">
+        <mat-icon>list</mat-icon>
+      </button>
+      <span><a href="/" class="logo">Graph</a></span>
+    </mat-toolbar>
+
+    <!-- Add Content Here -->
+    <section>
+      <router-outlet></router-outlet>
+    </section>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

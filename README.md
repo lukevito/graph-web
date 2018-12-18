@@ -1,3 +1,15 @@
+## Zmiana koloru okna windows
+
+https://www.howtogeek.com/258162/how-to-add-color-to-inactive-title-bars-in-windows-10/
+
+`regedit`
+
+`Komputer\HKEY_CURRENT_USER\Software\Microsoft\Windows\DWM`
+
+`AccentColorInactive` `565656`
+
+## ng create commands
+
 `ng g c nav`
 
 `ng g c contact`
@@ -5,6 +17,17 @@
 `ng g c home`
 
 `ng g c about`
+
+
+<h1 [ngClass]="{
+  'deepskyblue': h1Style,
+  'pink': !h1Style
+}">class test</h1>
+<h1 [ngStyle]="{
+  'color': h1Style ? 'pink' : 'black',
+  'font-size': h1Style ? '12px' : '24px'
+}">style test</h1>
+
 
 # GraphWeb
 

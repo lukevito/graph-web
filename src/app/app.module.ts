@@ -15,6 +15,7 @@ import { NavComponent } from './nav/nav.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import  {MaterialComponentsImportModule} from "./material-components-import/material-components-import.module";
+import { NeoVisComponent } from './neo-vis/neo-vis.component';
 
 // https://coursetro.com/posts/code/171/Angular-7-Tutorial---Learn-Angular-7-by-Example
 @NgModule({
@@ -23,7 +24,8 @@ import  {MaterialComponentsImportModule} from "./material-components-import/mate
     ContactComponent,
     HomeComponent,
     AboutComponent,
-    NavComponent
+    NavComponent,
+    NeoVisComponent
   ],
   imports: [
     AppRoutingModule,
