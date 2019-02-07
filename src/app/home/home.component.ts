@@ -3,7 +3,8 @@ import {
   OnInit,
   ViewChild,
   ComponentFactoryResolver,
-  ViewContainerRef
+  ViewContainerRef,
+  ComponentRef
 } from '@angular/core';
 import {DataService} from "../data.service";
 import {NeoVisComponent} from "../neo-vis/neo-vis.component";
@@ -17,14 +18,14 @@ export class HomeComponent implements OnInit {
 
   constructor(private data: DataService, private resolver: ComponentFactoryResolver) { }
 
-  @ViewChild('neoContainer', { read: ViewContainerRef }) container;
+  @ViewChild('neoContainer', { read: ViewContainerRef }) container: ViewContainerRef;
 
   h1Style: boolean = false;
+  cypherQuery: string;
 
   users: Object;
 
   ngOnInit() {
-    this.sendCypherQuery();
     this.data.getUserData().subscribe(data => {
       this.users = data;
       console.log(this.users)
@@ -32,8 +33,8 @@ export class HomeComponent implements OnInit {
   }
 
   sendCypherQuery() {
-    this.container.clear();
     const factory = this.resolver.resolveComponentFactory(NeoVisComponent);
-    let neoVisComponentComponentRef = this.container.createComponent(factory);
+    const neoVisComponentComponentRef = this.container.createComponent(factory, 0);
+    neoVisComponentComponentRef.instance.cypherQuery = this.cypherQuery;
   }
 }

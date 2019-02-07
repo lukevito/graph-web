@@ -12,7 +12,7 @@ import {Driver} from "neo4j-driver/types/v1";
 
 export class NeoVisComponent implements OnInit {
 
-  //@Input() cypherQuery: string = "match p = ((n)-[]->()) return p limit 10";
+  @Input() cypherQuery: string;
 
   private _config: any;
 
