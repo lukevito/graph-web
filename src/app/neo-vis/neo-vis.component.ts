@@ -417,7 +417,7 @@ export class NeoVisComponent implements OnInit {
     let configuration_container = document.getElementById(id_config_container);
 
     let neo4jConf = {
-      "server_url": "bolt://localhost:7687",
+      "server_url": "bolt://localhost:11001",
       "server_password": "123",
       "server_user": "neo4j"
     };

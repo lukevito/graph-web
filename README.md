@@ -1,3 +1,16 @@
+Co do zrobienia:
+
+
+-duplikacja komponentu z grafem (Patryk)
+-zapamietywanie query (razew) (Tomek)
+-wyswietlanie wyników (response json) (Łukasz)
+
+-szczegóły node wyświetlane po jego kliknięciu 
+-error loging 
+-klastering dla benów http://visjs.org/examples/network/other/changingClusteredEdgesNodes.html
+
+
+
 ## Zmiana koloru okna windows
 
 https://www.howtogeek.com/258162/how-to-add-color-to-inactive-title-bars-in-windows-10/
