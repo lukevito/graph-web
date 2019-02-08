@@ -409,7 +409,7 @@ export class NeoVisComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.setup(this.getConfig("container_vis_0", "container_config_0" ,"match p = ((n)-[]->()) return p limit 10"));
+    this.setup(this.getConfig("container_vis_0", "container_config_0" ,this.cypherQuery));
     this.renderNeoVis();
   }
 
