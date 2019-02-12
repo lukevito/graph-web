@@ -1,0 +1,6 @@
+<mat-nav-list>
+  <a href="#" *ngFor="let query of data" mat-list-item (click)="openLink($event, query)">
+    <span mat-line>{{query}}</span>
+  </a>
+</mat-nav-list>
+

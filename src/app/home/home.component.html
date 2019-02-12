@@ -1,8 +1,11 @@
-<p>
+<p (keydown.control.shift.h)="showCypherQueryHistory()">
   <mat-form-field class="example-full-width">
-    <textarea matInput placeholder="Cypher query" rows="4"></textarea>
+    <textarea autofocus matInput placeholder="Cypher query" rows="4" [(ngModel)]="cypherQuery" (keydown.control.enter)="sendCypherQuery()"></textarea>
   </mat-form-field>
-  <button mat-raised-button color="primary" (click)="sendCypherQuery()">send</button>
+  <button mat-raised-button color="primary" (click)="sendCypherQuery()" matTooltip="ctrl + enter">
+    <i class="material-icons">play_arrow</i> Run
+  </button>
+  <button mat-raised-button (click)="showCypherQueryHistory()" matTooltip="ctrl + shift + h"><i class="material-icons">event_note</i> Query history</button>
 </p>
 
 <template #neoContainer></template>

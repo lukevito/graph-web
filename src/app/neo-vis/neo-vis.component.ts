@@ -12,7 +12,7 @@ import {Driver} from "neo4j-driver/types/v1";
 
 export class NeoVisComponent implements OnInit {
 
-  //@Input() cypherQuery: string = "match p = ((n)-[]->()) return p limit 10";
+  @Input() cypherQuery: string;
 
   private _config: any;
 
@@ -409,7 +409,7 @@ export class NeoVisComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.setup(this.getConfig("container_vis_0", "container_config_0" ,"match p = ((n)-[]->()) return p limit 10"));
+    this.setup(this.getConfig("container_vis_0", "container_config_0" ,this.cypherQuery));
     this.renderNeoVis();
   }
 
