@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
       console.log(this.users)
     });
     //defaultowa wartosc - pewnie da sie to lepiej zrobic
-    this.cypherQuery = 'match (n) return n limit 10';
+    this.cypherQuery = 'match p=()-[]-() return p limit 10';
   }
 
   showCypherQueryHistory(): void {

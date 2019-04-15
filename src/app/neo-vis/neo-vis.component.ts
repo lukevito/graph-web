@@ -370,19 +370,18 @@ export class NeoVisComponent implements OnInit {
   getOptions() {
     return {
       nodes: {
-        shape: 'dot',
-        font: {
-          size: 26,
-          strokeWidth: 7
-        },
-        scaling: {
-          label: {
-            enabled: true
-          }
-        }
+        shape: 'circle',
+        widthConstraint: 50,
       },
       edges: {
-        length: 200
+        arrows: {
+          to: {enabled: true, scaleFactor: 0.7, type: 'arrow'},
+        },
+        length: 200,
+        dashes: true,
+        font: {
+          align: 'middle'
+        }
       },
       layout: {
         improvedLayout: false,
@@ -450,13 +449,38 @@ export class NeoVisComponent implements OnInit {
       }
     };
 
+    // nie wiem jak tu ten thickness dziala ale jak go wyrzuce to sie gruba linia dzieje
     const relationships =  {
       relationships: {
         DEPENDS_ON: {
           thickness: 'weight', // TODO:
           caption: false
+        },
+        ACTED_IN: {
+          thickness: 'weight',
+          caption: true
+        },
+        PRODUCED: {
+          thickness: 'weight',
+          caption: true
+        },
+        DIRECTED: {
+          thickness: 'weight',
+          caption: true
+        },
+        REVIEWED: {
+          thickness: 'weight',
+          caption: true
+        },
+        WROTE: {
+          thickness: 'weight',
+          caption: true
+        },
+        FOLLOWS: {
+          thickness: 'weight',
+          caption: true
         }
-      }
+      },
     };
 
     const cypQuery = {
