@@ -28,13 +28,11 @@ export class NeoVisComponent implements OnInit {
   private _data: {};
 
   private _network;
-  private _nodesData;
-  private _edgesData;
 
   /**
    *TODO:dawny konstructor
    *
-   * @constructor
+   * constructor
    */
   setup(config) {
     console.log(config);
@@ -43,23 +41,23 @@ export class NeoVisComponent implements OnInit {
     this._config    = config;
     this._encrypted = config.encrypted;
     this._trust     = config.trust;
-    this._query     = config.initial_cypher;
+    this._query     = config.cypher_query;
     this._nodes     = {};
     this._edges     = {};
     this._data      = {};
     this._network   = null;
-    this._nodesData = null;
-    this._edgesData = null;
 
     this._container = document.getElementById(config.container_id);
-    this._driver    = neo4j.v1.driver(config.server_url, neo4j.v1.auth.basic(config.server_user, config.server_password),
-      {encrypted: this._encrypted,
-              trust: this._trust
+    this._driver    = neo4j.v1.driver(config.server_url, neo4j.v1.auth.basic(config.server_user, config.server_password), {
+      encrypted: this._encrypted,
+      trust: this._trust
       });
   }
 
+  // wywalilem config_container bo i tak go narazie nie uzywalismy - pozniej mozemy dodac spowrotem
   ngOnInit() {
-    this.setup(this.getConfig('container_vis_0', 'container_config_0' , this.cypherQuery));
+    console.log('init');
+    this.setup(this.getConfig('container_vis_0', this.cypherQuery));
     this.render();
   }
 
@@ -200,8 +198,6 @@ export class NeoVisComponent implements OnInit {
     }
 
     // set caption
-
-
     if (typeof captionKey === 'boolean') {
       if (!captionKey) {
         edge['label'] = '';
@@ -282,7 +278,7 @@ export class NeoVisComponent implements OnInit {
 
   handleOnNext(record) {
     const self = this;
-    record.forEach(function(v){ // (v, k ,r)
+    record.forEach(function(v) { // (v, k ,r)
       if      (v.constructor.name === 'Node') {self.handleNode(v); }
       else if (v.constructor.name === 'Relationship') {self.handleRelationship(v); }
       else if (v.constructor.name === 'Path')         {self.handlePath(v); }
@@ -409,25 +405,9 @@ export class NeoVisComponent implements OnInit {
           fit: true
         }
 
-      }
-    };
-  }
-  getConfig(id_vis_container, id_config_container, cypherQ) {
-    const configuration_container = document.getElementById(id_config_container);
+      },
 
-    const neo4jConf = {
-      'server_url': 'bolt://localhost:7687',
-      'server_password': '123',
-      'server_user': 'neo4j',
-      'encrypted': "ENCRYPTION_OFF",
-      'trust': "TRUST_ALL_CERTIFICATES"
-    };
-    neo4jConf['container_id']  = id_vis_container;
-
-    const options = {};
-
-    options['options'] = this.getOptions();
-    options['options']['configure'] = {
+      configure: {
         enabled: false,
         filter: function (option, path) {
           if (path.indexOf('physics') !== -1) {
@@ -435,8 +415,22 @@ export class NeoVisComponent implements OnInit {
           }
           return true;
         },
-        container: configuration_container
-      };
+        //container: configuration_container
+      }
+    };
+  }
+
+  getConfig(id_vis_container, cypherQ) {
+    // const configuration_container = document.getElementById(id_config_container);
+
+    const neo4jConf = {
+      server_url: 'bolt://localhost:7687',
+      server_password: '123',
+      server_user: 'neo4j',
+      encrypted: 'ENCRYPTION_OFF',
+      trust: 'TRUST_ALL_CERTIFICATES',
+      container_id: id_vis_container
+    };
 
     const lables = {
       labels: {
@@ -446,6 +440,12 @@ export class NeoVisComponent implements OnInit {
           // sizeCorrection: 50,
           // community: "position"
           // "sizeCypher": "MATCH (n) WHERE id(n) = {id} MATCH (n)-[r]-() RETURN sum(r.weight) AS c"
+        },
+        Person: {
+          caption: 'name'
+        },
+        Movie: {
+          caption: 'title'
         }
       }
     };
@@ -458,9 +458,11 @@ export class NeoVisComponent implements OnInit {
         }
       }
     };
+
     const cypQuery = {
-      initial_cypher: cypherQ
+      cypher_query: cypherQ
     };
-    return Object.assign({}, neo4jConf, options, lables, relationships, cypQuery);
+
+    return Object.assign({}, neo4jConf, lables, relationships, cypQuery);
   }
 }

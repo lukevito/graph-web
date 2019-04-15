@@ -6,10 +6,10 @@ import {
   ViewContainerRef,
   ComponentRef
 } from '@angular/core';
-import {DataService} from "../data.service";
-import {NeoVisComponent} from "../neo-vis/neo-vis.component";
-import {MatBottomSheet} from "@angular/material";
-import {HistorycypherqueryComponent} from "../historycypherquery/historycypherquery.component";
+import {DataService} from '../data.service';
+import {NeoVisComponent} from '../neo-vis/neo-vis.component';
+import {MatBottomSheet} from '@angular/material';
+import {HistorycypherqueryComponent} from '../historycypherquery/historycypherquery.component';
 
 @Component({
   preserveWhitespaces: true,
@@ -23,7 +23,6 @@ export class HomeComponent implements OnInit {
 
   @ViewChild('neoContainer', { read: ViewContainerRef }) container: ViewContainerRef;
 
-  h1Style: boolean = false;
   cypherQuery: string;
   cypherQueryLog = new Array();
 
@@ -34,6 +33,8 @@ export class HomeComponent implements OnInit {
       this.users = data;
       console.log(this.users)
     });
+    //defaultowa wartosc - pewnie da sie to lepiej zrobic
+    this.cypherQuery = 'match (n) return n limit 10';
   }
 
   showCypherQueryHistory(): void {
